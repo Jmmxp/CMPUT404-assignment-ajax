@@ -85,7 +85,7 @@ def update(entity):
     if not myWorld.get(entity):
         myWorld.set(entity, json_body)
     else:
-        for k, v in json_body:
+        for k, v in json_body.items():
             myWorld.update(entity, k, v)
 
     return json.dumps(myWorld.get(entity))
