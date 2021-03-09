@@ -272,6 +272,7 @@ mouse.mousedowners.push(function(x,y,clicked,e) {
     addEntityWithoutName({'x':x,'y':y,'colour':'red'});
 });
 
+
 mouse.mouseuppers.push(function(x,y,clicked,e) {
     addEntityWithoutName({'x':x,'y':y,'colour':'red'});
 });
@@ -280,6 +281,18 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
     addEntityWithoutName({'x':x,'y':y,'colour':'white'});
 });
 
+// If the user presses key "c", clear the canvas.
+window.addEventListener("keydown", this.check, false);
+function check(e) {
+    if (e.keyCode === 67) {
+        sendJSONXMLHTTPRequest(fullHost + "/clear", null, (object) => {
+            world = object;
+            // Once the world is updated, ensure that we re-draw. 
+            // Clients that are not drawing can still see updates with this line.
+            drawNextFrame();
+        });
+    }
+};
 
 function update() {
     sendJSONXMLHTTPRequest(fullHost + "/world", null, (object) => {
@@ -287,7 +300,7 @@ function update() {
         // Once the world is updated, ensure that we re-draw. 
         // Clients that are not drawing can still see updates with this line.
         drawNextFrame();
-    })
+    });
     drawFrame();
 }
 
