@@ -21,6 +21,8 @@
         limitations under the License.
     "/>
     <script src="json2.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
   </head> 
   <body bgcolor="black" height="100%" width="100%"> 
     <canvas id="c" width="100%" height="100%" style="-webkit-tap-highlight-color: transparent;"></canvas> 
@@ -32,6 +34,8 @@ var fullHost = "http://" + host;
 var context = canvas.getContext("2d");
 var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
+
+// 1000 digits of pi
 var pi = "3.14159265358979323846264338327950288419716939937510\
   58209749445923078164062862089986280348253421170679\
   82148086513282306647093844609550582231725359408128\
@@ -52,6 +56,7 @@ var pi = "3.14159265358979323846264338327950288419716939937510\
   71010003137838752886587533208381420617177669147303\
   59825349042875546873115956286388235378759375195778\
   18577805321712268066130019278766111959092164201989"
+// index to keep track of what the next digit we should use is.
 var piIdx = 0;
 
 function sendJSONXMLHTTPRequest(url, objects, callback) {
@@ -60,8 +65,6 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
         if (xhr.readyState==4) {
             try {
                 if (xhr.status==200) {
-                    //XXX: parse some JSON from the request!
-                    //XXX: Pass the data to the callback!
                     // Referenced MDN https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response
                     callback(JSON.parse(xhr.response));
                 }
@@ -71,10 +74,6 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
             }
         }
     };
-    //XXX: POST to a URL
-    //XXX: set the mimetype and the accept headers!
-    // Remember to use application/json !
-
     // Referenced MDN https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json")
@@ -84,11 +83,10 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
 
 world = {};
 
-//XXX: TODO Make this prettier!
 function drawCircle(context,entity) {
     with(context) {
         fillStyle = entity["colour"];
-        font = "30px Arial";
+        font = "40px Quantico";
         fillText(entity["digit"], entity["x"], entity["y"]);
     }
 }
@@ -158,7 +156,10 @@ function getPosition(e) {
 
 
 function addEntity(entity, data) {
+    // Add the next digiit of pi to use to the entity.
     data["digit"] = pi[piIdx];
+    console.log("pi idx is " + piIdx);
+    console.log("digit is " + pi[piIdx])
     piIdx = (piIdx + 1) % pi.length;
     world[entity] = data;
     drawNextFrame(); // (but should we?)
@@ -169,7 +170,8 @@ function addEntity(entity, data) {
 var counter = 0;
 function addEntityWithoutName(data) {
     //var name = "X"+Math.floor((Math.random()*100)+1);
-    var name = "X"+(counter++)%100;
+    // Edited from 100 to 314, to allow 314 objects on the canvas at a time.
+    var name = "X"+(counter++)%314;
     addEntity(name,data);
 }
 
@@ -270,10 +272,9 @@ mouse = (function() {
 })();
 
 // Add the application specific mouse listeners!
-//XXX: TODO Make these prettier!
 
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'magenta'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'red'});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
@@ -281,13 +282,11 @@ mouse.mouseuppers.push(function(x,y,clicked,e) {
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'green',
-                          'radius':10});
+    addEntityWithoutName({'x':x,'y':y,'colour':'white'});
 });
 
 
 function update() {
-    //XXX: TODO Get the world from the webservice using a XMLHTTPRequest
     sendJSONXMLHTTPRequest(fullHost + "/world", null, (object) => {
         world = object;
         // Once the world is updated, ensure that we re-draw. 
