@@ -5,7 +5,9 @@ CMPUT404-assignment-ajax
 
 See requirements.org (plain-text) for a description of the project.
 
-Make a shared state AJAX drawing program
+Make a shared state AJAX drawing program.
+
+Drawing on the canvas results in digits of pi being drawn, one by one, up to one thousand digits. It then wraps back around to the first digit of pi.
 
 Collaboration
 =============================
@@ -24,6 +26,8 @@ Referenced MDN for parsing response of AJAX requests https://developer.mozilla.o
 Used Quantico custom font from Google Fonts: https://fonts.google.com/specimen/Quantico
 
 Referenced W3schools for drawing text on the canvas: https://www.w3schools.com/graphics/canvas_text.asp
+
+Referenced Rhyono's answer on how to catch key down events on canvas: https://stackoverflow.com/a/12241197
 
 Contributors / Licensing
 ========================
