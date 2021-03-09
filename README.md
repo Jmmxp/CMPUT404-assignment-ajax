@@ -28,6 +28,6 @@ Referenced W3schools for drawing text on the canvas: https://www.w3schools.com/g
 Contributors / Licensing
 ========================
 
-Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
+Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle. Changes added to the assignment are LICENSE'D under me.
 
 
