@@ -83,10 +83,11 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
 
 world = {};
 
-function drawCircle(context,entity) {
+function drawDigit(context,entity) {
     with(context) {
         fillStyle = entity["colour"];
         font = "40px Quantico";
+        // Draw the entity by looking at the digit of pi it has inside of it.
         fillText(entity["digit"], entity["x"], entity["y"]);
     }
 }
@@ -94,9 +95,6 @@ function drawCircle(context,entity) {
 function prepEntity(entity) {
     if (!entity["colour"]) {
         entity["colour"] = "#FF0000";
-    }
-    if (!entity["radius"]) {
-        entity["radius"] = 50;
     }
     return entity;
 }
@@ -115,7 +113,7 @@ function renderFrame() {
     clearFrame();
     for (var key in world) {
         var entity = world[key];
-        drawCircle(context,prepEntity(entity));
+        drawDigit(context,prepEntity(entity));
     }
 }
 
@@ -158,12 +156,9 @@ function getPosition(e) {
 function addEntity(entity, data) {
     // Add the next digiit of pi to use to the entity.
     data["digit"] = pi[piIdx];
-    console.log("pi idx is " + piIdx);
-    console.log("digit is " + pi[piIdx])
     piIdx = (piIdx + 1) % pi.length;
     world[entity] = data;
     drawNextFrame(); // (but should we?)
-    //XXX: Send a XHTML Request that updates the entity you just  modified!
     sendJSONXMLHTTPRequest(fullHost + "/entity/" + entity, world[entity], (_) => {})
 }
 
