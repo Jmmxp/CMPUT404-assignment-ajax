@@ -9,7 +9,7 @@ Make a shared state AJAX drawing program.
 
 Drawing on the canvas results in digits of pi being drawn, one by one, up to one thousand digits. It then wraps back around to the first digit of pi.
 
-Pressing C allows you to clear the canvas.
+Pressing 'c' allows you to clear the canvas.
 
 Collaboration
 =============================
