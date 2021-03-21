@@ -16,11 +16,18 @@ I discussed how to approach the assignment and any issues I ran into together wi
 
 Sources
 =============================
-Referenced my own code from assignment 4: https://github.com/Jmmxp/CMPUT404-assignment-ajax
 
-Referenced the CMPUT404 WebSocket examples https://github.com/uofa-cmput404/cmput404-slides/tree/master/examples/WebSocketsExamples for sockets.py and index.html.
+Referenced the CMPUT404 example: ObserverExampleAJAX https://github.com/uofa-cmput404/cmput404-slides/tree/master/examples/ObserverExampleAJAX for the server.py endpoints.
+
+Referenced MDN for sending AJAX requests https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send
+
+Referenced MDN for parsing response of AJAX requests https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response
 
 Used Quantico custom font from Google Fonts: https://fonts.google.com/specimen/Quantico
+
+Referenced W3schools for drawing text on the canvas: https://www.w3schools.com/graphics/canvas_text.asp
+
+Referenced Rhyono's answer on how to catch key down events on canvas: https://stackoverflow.com/a/12241197
 
 Contributors / Licensing
 ========================
